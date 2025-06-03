@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f2f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .profile-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            width: 600px;
+            text-align: center; /* Added for general centering of content */
+        }
+        .profile-img {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 120px;
+            height: 120px;
+            object-fit: cover; /* Ensures the image covers the area without distortion */
+            border-radius: 10px;
+            border: 2px solid #ccc;
+        }
+        .info {
+            font-size: 24px;
+            margin-top: 20px;
+            font-weight: bold;
+            color: #333;
+            /* Removed text-center from this div, added to profile-card for broader impact */
+        }
+        /* Added some margin to the bottom of the main content to avoid overlap with image */
+        .info > div {
+            margin-bottom: 10px; /* Adjust as needed */
+        }
+        .info .mb-4 {
+            margin-bottom: 1.5rem !important; /* Keep Bootstrap's margin-bottom */
+        }
+    </style>
+</head>
+<body>
+    <div class="profile-card">
+        {# Display profile image if path exists, otherwise display a default placeholder #}
+        {% if user.image_path %}
+        <img src="{{ url_for('static', filename=user.image_path) }}" alt="Profile Picture" class="profile-img">
+        {% else %}
+        {# You might want to have a default image, e.g., static/default_profile.png #}
+<img src="{{ url_for('static', filename=user.image_path) }}" alt="Profile Picture" class="profile-img">
+        {% endif %}
+
+        <div class="info">
+            {# Removed empty <div></div>, replaced with direct content #}
+            <div class="mb-4">{{ user.name }}</div>
+
+            <div class="mb-4">
+                {# Removed extra <div>, formatted content directly #}
+                <p><strong></strong> {{ user.age }} Years Old</p>
+            </div>
+
+            <div>{{ user.address }}</div>
+        </div>
+    </div>
+</body>
+</html>
